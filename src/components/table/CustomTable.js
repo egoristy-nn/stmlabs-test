@@ -37,19 +37,19 @@ const CustomTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((user) => (
             <TableRow
-              key={row.name}
+              key={user.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row" align='center'>
-                {row.name}
+                {user.name}
               </TableCell>
-              <TableCell align='center'>{row.picture}</TableCell>
-              <TableCell align='center'>{row.location}</TableCell>
-              <TableCell align='center'>{row.email}</TableCell>
-              <TableCell align='center'>{row.phone}</TableCell>
-              <TableCell align='center'>{row.registrationDate}</TableCell>
+              <TableCell align='center'>{user.picture}</TableCell>
+              <TableCell align='center'>{user.location}</TableCell>
+              <TableCell align='center'>{user.email}</TableCell>
+              <TableCell align='center'>{user.phone}</TableCell>
+              <TableCell align='center'>{user.registrationDate}</TableCell>
             </TableRow>
           ))}
         </TableBody>
