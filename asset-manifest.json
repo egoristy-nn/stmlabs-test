@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/stmlabs-test/static/css/main.e6c13ad2.css",
-    "main.js": "/stmlabs-test/static/js/main.23bcc0f3.js",
+    "main.js": "/stmlabs-test/static/js/main.e0e06ea2.js",
     "index.html": "/stmlabs-test/index.html",
     "main.e6c13ad2.css.map": "/stmlabs-test/static/css/main.e6c13ad2.css.map",
-    "main.23bcc0f3.js.map": "/stmlabs-test/static/js/main.23bcc0f3.js.map"
+    "main.e0e06ea2.js.map": "/stmlabs-test/static/js/main.e0e06ea2.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.23bcc0f3.js"
+    "static/js/main.e0e06ea2.js"
   ]
 }
