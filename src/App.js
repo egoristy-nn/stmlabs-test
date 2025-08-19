@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { useEffect, useState } from 'react';
 import { getUsers } from './api/Api';
@@ -33,11 +33,11 @@ function App() {
     if (error) throw error;
 
   return (
-    <Router>
+    <BrowserRouter basename='/stmlabs-test'>
       <Routes>
         <Route path="/" element={<HomePage loading={loading} users={users}/>} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
