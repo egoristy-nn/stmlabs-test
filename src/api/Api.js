@@ -1,16 +1,12 @@
-const URL = 'https://randomuser.me/api/?results=15'
+import axios from 'axios';
+
+const URL = 'https://randomuser.me/api/?results=15';
 
 export async function getUsers() {
-    const response = await fetch(`${URL}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    try {
+        const response = await axios.get(URL);
+        return response.data;
+    } catch (error) {
+        throw error;
     }
-
-    return response.json();
 }

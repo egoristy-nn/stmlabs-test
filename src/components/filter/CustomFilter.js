@@ -1,13 +1,12 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Box, Button, TextField } from '@mui/material';
 import React from 'react';
 
-const CustomFilter = () => {
+const CustomFilter = ({onSearch}) => {
     const [value, setValue] = React.useState('');
 
     const handleChange = (event) => {
         setValue(event.target.value);
+        onSearch(event.target.value);
     };
 
     const handleReset = () => {

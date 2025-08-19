@@ -2,39 +2,40 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { useEffect, useState } from 'react';
 import { getUsers } from './api/Api';
+import CustomLoader from './components/loader/CustomLoader';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //       async function fetchUsers () {
-  //           try {
-  //               const data = await getUsers();
-  //               setUsers(data);
-  //               setLoading(false);
-  //           } catch (error) {
-  //               setError(error);
-  //               setLoading(false);
-  //           }
-  //       }
-        
-  //       fetchUsers();
-  //   }, []);
+  useEffect(() => {
+        async function fetchCharacters () {
+            try {
+                const data = await getUsers();
+                setUsers(data.results);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        }
 
-  //   console.log(users);
+        fetchCharacters();
+    }, []);
 
-  //   if (loading) return (
-  //     <HomePage users={[]}/>
-  //   );
+    console.log(users);
 
-  //   if (error) throw error;
+    if (loading) return (
+        <CustomLoader />
+    );
+
+    if (error) throw error;
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage loading={loading} users={users}/>} />
       </Routes>
     </Router>
   );

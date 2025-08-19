@@ -1,32 +1,25 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Tooltip, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function createData(
-  name,
-  picture,
-  location,
-  email,
-  phone,
-  registrationDate
-) {
-  return { name, picture, location, email, phone, registrationDate };
-}
+const CustomTable = ({ users }) => {
+  if (users.length === 0) {
+    return (
+      <Box 
+        display="flex" 
+        justifyContent="center" 
+        alignItems="center" 
+        height="200px"
+      >
+        <Typography variant="h6" color="textSecondary">
+          No users found matching your search
+        </Typography>
+      </Box>
+    );
+  }
 
-const rows = [
-    createData('Egor', 'picture', 'location', 'email', 'phone', 'registrationDate'),
-    createData('Egor', 'picture', 'location', 'email', 'phone', 'registrationDate'),
-    createData('Egor', 'picture', 'location', 'email', 'phone', 'registrationDate'),
-]
-
-const CustomTable = () => {
   return (
-    <TableContainer >
+    <TableContainer>
       <Table>
-        <TableHead sx={{ backgroundColor: '#f2f2f2'}}>
+        <TableHead>
           <TableRow>
             <TableCell sx={{ fontWeight: 'bold' }} align='center'>Name</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }} align='center'>Picture</TableCell>
@@ -37,19 +30,71 @@ const CustomTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((user) => (
+          {users.map((user) => (
             <TableRow
-              key={user.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              key={user.login.uuid}
+              sx={{ 
+                '&:last-child td, &:last-child th': { border: 0 },
+                '&:hover': { backgroundColor: '#fafafa' }
+              }}
             >
               <TableCell component="th" scope="row" align='center'>
-                {user.name}
+                {`${user.name.title} ${user.name.first} ${user.name.last}`}
               </TableCell>
-              <TableCell align='center'>{user.picture}</TableCell>
-              <TableCell align='center'>{user.location}</TableCell>
+              <TableCell align='center'>
+                <Tooltip
+                  title={
+                    <Box
+                      component="img"
+                      src={user.picture.large}
+                      alt={`${user.name.first} ${user.name.last}`}
+                      sx={{
+                        width: 150,
+                        height: 150,
+                        borderRadius: '8px',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  }
+                  arrow
+                  placement="top"
+                  componentsProps={{
+                    tooltip: {
+                      sx: {
+                        backgroundColor: 'transparent',
+                        padding: 0,
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+                      }
+                    }
+                  }}
+                >
+                  <img 
+                    src={user.picture.thumbnail} 
+                    alt={`${user.name.first} ${user.name.last}`}
+                    style={{ 
+                      borderRadius: '50%', 
+                      width: '50px', 
+                      height: '50px',
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
+                    }}
+                  />
+                </Tooltip>
+              </TableCell>
+              <TableCell align='center'>
+                {`${user.location.city}, ${user.location.country}`}
+              </TableCell>
               <TableCell align='center'>{user.email}</TableCell>
               <TableCell align='center'>{user.phone}</TableCell>
-              <TableCell align='center'>{user.registrationDate}</TableCell>
+              <TableCell align='center'>
+                {new Date(user.registered.date).toLocaleDateString()}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -58,4 +103,4 @@ const CustomTable = () => {
   );
 }
 
-export default CustomTable
+export default CustomTable;
